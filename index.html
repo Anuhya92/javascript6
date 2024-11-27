@@ -14,7 +14,7 @@
     <title>Typing Game</title>
   </head>
   <body>
-    <button id="settings-btn" class="settings-btn">
+    <button id="settings-btn" class="settings-btn" onclick="hideSettings()">
       <i class="fas fa-cog"></i>
     </button>
 
@@ -22,7 +22,7 @@
       <form id="settings-form">
         <div>
           <label for="difficutly" class="difficulty">Difficulty:</label>
-          <select id="difficulty">
+          <select id="difficulty" onchange="chooseDifficulty(event)">
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
@@ -42,6 +42,7 @@
         id="text"
         autocomplete="off"
         placeholder="Type the word here..."
+        onchange="validateWord(event)"
       />
 
       <p class="time-container">Time left: <span id="time">10s</span></p>
