@@ -1,5 +1,3 @@
-// Variables for the DOM elements
-
 // Array
 const words = [
   "dependent",
@@ -34,6 +32,13 @@ let randomWord = "";
 let difficultyLevel = "easy";
 let timeRemaining = timeMap[difficultyLevel];
 
+// DOM Elements
+const scoreElement = document.getElementById("score");
+const timeElement = document.getElementById("time");
+const inputElement = document.getElementById("text");
+const settingsElement = document.getElementById("settings");
+const endGameElement = document.getElementById("end-game-container");
+
 // Functions
 
 function addWordToDOM() {
@@ -50,9 +55,8 @@ function chooseDifficulty(event) {
 
 function updateScore() {
   score = score + 1;
-  const scoreDOMElement = document.getElementById("score");
-  if (scoreDOMElement) {
-    scoreDOMElement.textContent = score;
+  if (scoreElement) {
+    scoreElement.textContent = score;
   }
 }
 
@@ -67,7 +71,7 @@ function updateTime() {
     timeRemaining = 0;
     gameOver();
   }
-  document.getElementById("time").textContent = timeRemaining + "s";
+  timeElement.textContent = timeRemaining + "s";
 }
 
 function resetTime() {
@@ -75,7 +79,11 @@ function resetTime() {
 }
 
 function gameOver() {
-  alert("Game over");
+  const gameOverTextElement = document.createElement("p");
+  gameOverTextElement.innerHTML =
+    "<h3>Game over</h3><h5>Total Score</h5>" + score;
+  endGameElement.appendChild(gameOverTextElement);
+  endGameElement.style.display = "block";
   clearInterval(timerInterval);
 }
 
@@ -88,12 +96,11 @@ function validateWord(event) {
     addWordToDOM();
 
     //Reset input field
-    document.getElementById("text").value = "";
+    inputElement.value = "";
   }
 }
 
 function hideSettings() {
-  const settingsElement = document.getElementById("settings");
   const isHidden = settingsElement.style.visibility === "hidden";
   if (isHidden) {
     settingsElement.style.visibility = "visible";
